@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Products\Schemas;
 
 use Filament\Forms\Components\CheckboxList;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -26,25 +27,11 @@ class ProductForm
                         'inactive' => 'Inactive',
                     ])
                     ->required(),
-
-                Repeater::make('links')
-                    ->relationship() // usa automaticamente Product::links()
-                    ->label('Links')
-                    ->schema([
-                        TextInput::make('url')
-                            ->required()
-                            ->url(),
-
-                        Select::make('type')
-                            ->options([
-                                'checkout' => 'Checkout',
-                                'upsell'   => 'Upsell',
-                                'downsell' => 'Downsell',
-                            ])
-                            ->required(),
-                    ])
-                    ->columns(2)
-                    ->addActionLabel('Adicionar link'),
+                FileUpload::make('image')
+                    ->label('Product Image')
+                    ->directory('products')
+                    ->disk('public')
+                    ->image(),
             ]);
     }
 }

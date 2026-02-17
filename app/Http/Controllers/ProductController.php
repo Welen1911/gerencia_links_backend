@@ -20,6 +20,7 @@ class ProductController extends Controller
                     'id' => $product->id,
                     'name' => $product->name,
                     'checkout_url' => $product->pivot->checkout_url,
+                    'image_url' => $product->image ? asset('storage/' . $product->image) : null,
                 ];
             });
 
@@ -40,6 +41,7 @@ class ProductController extends Controller
             'id' => $product->id,
             'name' => $product->name,
             'checkout_url' => $product->pivot->checkout_url,
+            'image_url' => $product->image ? asset('storage/' . $product->image) : null,
         ]);
     }
 }
